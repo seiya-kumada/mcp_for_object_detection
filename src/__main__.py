@@ -1,19 +1,16 @@
 """Entry point for MCP object detection server."""
 
 import asyncio
-import sys
 import logging
+import sys
 
 from .server import ObjectDetectionServer
 
 # Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
 
-async def main():
+async def main() -> None:
     """Main entry point."""
     server = ObjectDetectionServer()
     await server.run()

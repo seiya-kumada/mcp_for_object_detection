@@ -23,7 +23,7 @@ class ObjectDetectionServer:
         self.detector = ObjectDetector()
         self._setup_handlers()
 
-    def _setup_handlers(self):
+    def _setup_handlers(self) -> None:
         """Set up server handlers."""
 
         @self.server.list_tools()

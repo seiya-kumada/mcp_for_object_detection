@@ -1,4 +1,5 @@
 # MCP物体検出サーバー仕様書
+Claude Codeに最初に作らせた仕様書です。
 
 ## 概要
 MCP (Model Context Protocol) Python SDKを使用して、画像内の物体を検出するシンプルなMCPサーバーを構築します。このサーバーは、Claude Desktopアプリケーションと連携し、画像から物体を検出して、その矩形座標とラベルをJSON形式で返します。
@@ -94,24 +95,6 @@ Claude Desktopの設定ファイル（`claude_desktop_config.json`）に以下�
 Claude Desktop内での使用例：
 - 「/path/to/image.jpg の画像から物体を検出してください」
 - 「この画像に何が写っているか検出してください: /Users/xxx/photo.png」
-
-## インストールと起動
-
-### インストール手順
-```bash
-# リポジトリのクローン
-git clone https://github.com/yourusername/mcp_for_object_detection.git
-cd mcp_for_object_detection
-
-# 依存関係のインストール
-pip install -r requirements.txt
-```
-
-### 動作確認
-```bash
-# MCPサーバーの起動テスト
-python -m mcp_for_object_detection
-```
 
 ## エラーハンドリング
 - 画像ファイルが見つからない場合のエラーメッセージ

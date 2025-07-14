@@ -57,11 +57,13 @@ uv run python test_detector.py
 # MCPサーバーの起動（デバッグ用）
 uv run python -m src
 ```
+test_detector.pyのテスト画像はハードコーディング（./images/test.png）してある。
 
 ### Claude Desktopとの統合
 
 1. Claude Desktopの設定ファイルを編集：
    - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
+   - Windows: `C:\Users\seiyakumada\AppData\Roaming\Claude\claude_desktop_config.json`
 
 2. 以下の設定を追加：
 ```json
@@ -73,10 +75,20 @@ uv run python -m src
     }
 }
 ```
+Windowsの場合は
+```json
+{
+    "mcpServers": {
+        "object-detection": {
+            "command": "C:\\projects\\mcp_for_object_detection\\start_server.bat"
+        }
+    }
+}
+```
 
 3. Claude Desktopを再起動
 
-4. Claude Desktop内で使用：
+4. Claude Desktop内で使用：画像をコピペするのではなく、プロンプト内に画像へのパスを書く。
 ```
 画像 /path/to/image.jpg から物体を検出してください
 ```
@@ -215,10 +227,3 @@ mcp_for_object_detection/
 
 初回実行時、YOLOv8nモデル（約6.5MB）が自動的にダウンロードされます。
 
-## ライセンス
-
-MIT License
-
-## 貢献
-
-プルリクエストを歓迎します。大きな変更の場合は、まずissueを作成して変更内容を説明してください。
