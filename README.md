@@ -19,15 +19,31 @@ YOLOv8を使用した物体検出MCPサーバー。Claude Desktopから画像内
 
 ### セットアップ
 
+#### 自動セットアップ（推奨）
+
+```bash
+git clone https://github.com/yourusername/mcp_for_object_detection.git
+cd mcp_for_object_detection
+chmod +x setup.sh
+./setup.sh
+```
+
+#### 手動セットアップ
+
 1. リポジトリのクローン：
 ```bash
 git clone https://github.com/yourusername/mcp_for_object_detection.git
 cd mcp_for_object_detection
 ```
 
-2. 依存関係のインストール：
+2. uvのインストール（未インストールの場合）：
 ```bash
-uv pip install -r requirements.txt
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+3. 依存関係のインストール：
+```bash
+uv sync
 ```
 
 ## 使用方法
@@ -66,6 +82,37 @@ uv run python -m src
 ```
 
 ## スクリプトの説明
+
+### start_server_portable.sh（推奨）
+
+環境に依存しないポータブルな起動スクリプトです。
+
+```bash
+#!/bin/bash
+# スクリプトのディレクトリを取得
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
+
+# uvがインストールされているかチェック
+if ! command -v uv &> /dev/null; then
+    echo "Error: uv is not installed"
+    exit 1
+fi
+
+# 依存関係をインストール（初回のみ）
+if [ ! -d ".venv" ]; then
+    uv sync
+fi
+
+# MCPサーバーを起動
+uv run python -m src
+```
+
+**機能：**
+- 環境に依存しない（絶対パスを使用しない）
+- uvの存在チェック
+- 自動依存関係インストール
+- Claude Desktopからの実行用に設計
 
 ### start_server.sh
 
@@ -134,8 +181,12 @@ mcp_for_object_detection/
 │   └── test.png          # テスト用画像
 ├── start_server.sh       # 通常起動用スクリプト
 ├── start_server_debug.sh # デバッグ起動用スクリプト
+├── start_server_portable.sh # ポータブル起動用スクリプト（推奨）
+├── start_server.bat      # Windows用起動スクリプト
+├── setup.sh              # 自動セットアップスクリプト
 ├── test_detector.py      # 検出機能テストスクリプト
-├── requirements.txt      # Python依存関係
+├── pyproject.toml        # uvプロジェクト設定
+├── requirements.txt      # Python依存関係（後方互換性）
 ├── README.md            # このファイル
 └── specification.md     # 仕様書
 ```
