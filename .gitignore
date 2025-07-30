@@ -179,3 +179,4 @@ pyrightconfig.json
 a.out
 images/*
 yolov8n.pt
+static/*
